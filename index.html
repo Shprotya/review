@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Review Analyzer</title>
+<style>
+body { font-family: Arial; padding: 20px; }
+button { margin: 5px; padding: 10px; }
+.card { padding:10px; margin:5px; border:1px solid #ccc; }
+</style>
+</head>
+<body>
+
+<h1>AI Review Analyzer</h1>
+
+<input type="file" id="fileInput">
+<button onclick="uploadFile()">Upload Reviews</button>
+
+<h2>Summary</h2>
+<button onclick="loadStats()">Load Summary</button>
+<div id="summary"></div>
+
+<h2>Positive Reviews</h2>
+<button onclick="getPositive()">Show Positive</button>
+<div id="results"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
