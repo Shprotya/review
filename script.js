@@ -7,9 +7,12 @@ async function uploadFile() {
     const data = await res.json();
 
     await fetch(data.uploadURL, {
-        method: "PUT",
-        body: file
-    });
+    method: "PUT",
+    body: file,
+    headers: {
+        "Content-Type": "application/json"
+    }
+});
 
     alert("Uploaded!");
 }
