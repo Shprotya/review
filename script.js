@@ -20,9 +20,10 @@ async function uploadFile() {
 async function loadStats() {
     const res = await fetch(API + "/reviews");
     const data = await res.json();
+    const counts = JSON.parse(data.body);
 
     let html = "";
-    for (let k in data) {
+    for (let k in counts) {
         html += `<div class="card">${k}: ${data[k]}</div>`;
     }
 
@@ -32,11 +33,10 @@ async function loadStats() {
 async function getPositive() {
     const res = await fetch(API + "/reviews?sentiment=POSITIVE");
     const data = await res.json();
-
+    const reviews = JSON.parse(data.body);  // ✅ parse the body string
     let html = "";
-    data.forEach(r => {
+    reviews.forEach(r => {                  // ✅ loop over reviews, not data
         html += `<div class="card">${r.review}</div>`;
     });
-
     document.getElementById("results").innerHTML = html;
 }
