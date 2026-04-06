@@ -20,22 +20,28 @@ async function uploadFile() {
 async function loadStats() {
     const res = await fetch(API + "/reviews");
     const data = await res.json();
-    const counts = JSON.parse(data.body);
-
+    console.log("raw data:", data);        // 👈 add this temporarily
+    console.log("data.body:", data.body);  // 👈 and this
+    
+    // Try this — if body exists parse it, otherwise use data directly
+    const counts = data.body ? JSON.parse(data.body) : data;
+    
     let html = "";
     for (let k in counts) {
-        html += `<div class="card">${k}: ${data[k]}</div>`;
+        html += `<div class="card">${k}: ${counts[k]}</div>`;
     }
-
     document.getElementById("summary").innerHTML = html;
 }
 
 async function getPositive() {
     const res = await fetch(API + "/reviews?sentiment=POSITIVE");
     const data = await res.json();
-    const reviews = JSON.parse(data.body);  // ✅ parse the body string
+    console.log("positive raw data:", data); // 👈 add this
+
+    const reviews = data.body ? JSON.parse(data.body) : data;
+
     let html = "";
-    reviews.forEach(r => {                  // ✅ loop over reviews, not data
+    reviews.forEach(r => {
         html += `<div class="card">${r.review}</div>`;
     });
     document.getElementById("results").innerHTML = html;
